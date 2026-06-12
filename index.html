@@ -79,8 +79,8 @@
         console.info("[live-reload] watching " + FILES.length + " files (add ?live=0 to disable)");
       })();
     </script>
-    <link rel="stylesheet" href="styles/tokens.css" />
-    <link rel="stylesheet" href="styles/app.css" />
+    <link rel="stylesheet" href="styles/tokens.css?v=35" />
+    <link rel="stylesheet" href="styles/app.css?v=35" />
     <script type="importmap">
       {
         "imports": {
@@ -93,14 +93,6 @@
   <body>
     <main id="scene" aria-label="Godview Safari living diorama"></main>
     <div class="loading">Loading Godview Safari</div>
-    <div class="hud" id="hud">
-      <b>拖动 / 双指滑动</b> 平移(带惯性) · <b>捏合 / Ctrl+滚轮</b> 缩放 ·
-      <b>双击</b> 放大 · <b>Option+双击</b> 缩小 ·
-      <b>双指捻转</b> 旋转(触屏/Safari 触控板;Chrome 用 <b>Option+双指滑</b>) ·
-      <b>Option+拖 / 拖罗盘</b> 旋转·俯仰 · <b>方向键/WASD</b> 平移 ·
-      <b>⇧⌘↑</b> 回正北 · <b>右侧滑杆</b> 俯仰 · <b>F</b> 自由飞行 ·
-      <b>太阳钟</b> 拖=调时 点=加速 · <b>T</b> 暂停 · <b>v34</b>
-    </div>
     <div id="flyBadge">自由飞行 · <b>拖动</b>看向 · <b>WASD</b>走 · <b>Q/E·空格</b>升降 · <b>滚轮</b>前后 · <b>F</b> 退出</div>
 
     <!-- Right-side control dashboard: time, sun dial, tilt, zoom, compass -->
@@ -162,6 +154,6 @@
     <div class="vignette"></div>
     <div class="grain"></div>
 
-    <script type="module" src="src/main.js?v=34"></script>
+    <script type="module" src="src/main.js?v=35"></script>
   </body>
 </html>

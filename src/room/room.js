@@ -6,9 +6,9 @@
 // and its own TIME world: the map's clock/accelerator never touches it.
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { WORLD_W, WORLD_D, ROOM, L_ROOM } from "../core/config.js?v=34";
-import { scene, setLayerDeep, roomObjects, tableObjects } from "../core/context.js?v=34";
-import { material, pbrMaterial } from "../core/materials.js?v=34";
+import { WORLD_W, WORLD_D, ROOM, L_ROOM } from "../core/config.js?v=35";
+import { scene, setLayerDeep, roomObjects, tableObjects } from "../core/context.js?v=35";
+import { material, pbrMaterial } from "../core/materials.js?v=35";
 
 // Loads one of the downloaded Poly Haven furniture models and fits it
 // to `targetH` world units tall, resting on y=0 of its group.

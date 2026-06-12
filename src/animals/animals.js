@@ -6,15 +6,15 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import * as SkeletonUtils from "three/addons/utils/SkeletonUtils.js";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
-import { clamp, lerpAngle, smoothstep, wrapSigned, rotate2D } from "../core/utils.js?v=34";
+import { clamp, lerpAngle, smoothstep, wrapSigned, rotate2D } from "../core/utils.js?v=35";
 import {
   WORLD_W, WORLD_D, M_UNIT, ANIMAL_BX, ANIMAL_BZ,
   LAKES, lakeRadiusAt, isRigCloseup,
-} from "../core/config.js?v=34";
-import { rng, scene, camera } from "../core/context.js?v=34";
-import { material } from "../core/materials.js?v=34";
-import { terrainHeight } from "../world/terrain.js?v=34";
-import { getDistanceQuality } from "../camera/mapcam.js?v=34";
+} from "../core/config.js?v=35";
+import { rng, scene, camera } from "../core/context.js?v=35";
+import { material } from "../core/materials.js?v=35";
+import { terrainHeight } from "../world/terrain.js?v=35";
+import { getDistanceQuality } from "../camera/mapcam.js?v=35";
 
 export const animals = [];
 export const herds = [];

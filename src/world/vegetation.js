@@ -5,10 +5,10 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
-import { WORLD_W, WORLD_D, M_UNIT, LAKES } from "../core/config.js?v=34";
-import { rng, scene, applyWindSway } from "../core/context.js?v=34";
-import { material, treeBarkMat, treeCanopyMat } from "../core/materials.js?v=34";
-import { terrainHeight, lushFactor, isUnderwater } from "./terrain.js?v=34";
+import { WORLD_W, WORLD_D, M_UNIT, LAKES } from "../core/config.js?v=35";
+import { rng, scene, applyWindSway } from "../core/context.js?v=35";
+import { material, treeBarkMat, treeCanopyMat } from "../core/materials.js?v=35";
+import { terrainHeight, lushFactor, isUnderwater } from "./terrain.js?v=35";
 
 // Photoscanned grass clumps (Poly Haven "Grass Medium 01", CC0).
 // Variants are instanced per spatial cell so off-screen cells get

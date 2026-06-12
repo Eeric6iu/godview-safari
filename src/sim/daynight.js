@@ -5,10 +5,10 @@
 // the herds. The ROOM lives on real time and its own lamps: completely
 // isolated from this module.
 import * as THREE from "three";
-import { clamp, smoothstep } from "../core/utils.js?v=34";
-import { WORLD_W, WORLD_D, L_MAP, params } from "../core/config.js?v=34";
-import { scene } from "../core/context.js?v=34";
-import { controls } from "../camera/mapcam.js?v=34";
+import { clamp, smoothstep } from "../core/utils.js?v=35";
+import { WORLD_W, WORLD_D, L_MAP, params } from "../core/config.js?v=35";
+import { scene } from "../core/context.js?v=35";
+import { controls } from "../camera/mapcam.js?v=35";
 
 export const sunOffset = new THREE.Vector3();
 let mapHemi = null; // hemisphere light for the map, driven by day-night

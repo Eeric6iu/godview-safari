@@ -2,12 +2,12 @@
 // the ×1/×4/×8 accelerator, tilt slider, zoom, reset and compass. This
 // module only WIRES DOM to the camera/day-night state and mirrors that
 // state back per frame — all behavior lives in mapcam.js / daynight.js.
-import { clamp } from "../core/utils.js?v=34";
-import { DEG } from "../core/config.js?v=34";
+import { clamp } from "../core/utils.js?v=35";
+import { DEG } from "../core/config.js?v=35";
 import {
   mapCam, zoomAt, resetMapCamera, maxTiltFor,
-} from "../camera/mapcam.js?v=34";
-import { dayNight, dayNightSample, DN } from "../sim/daynight.js?v=34";
+} from "../camera/mapcam.js?v=35";
+import { dayNight, dayNightSample, DN } from "../sim/daynight.js?v=35";
 
 // ---- Compass: drag rotates/tilts, plain click animates back to north ----
 const compassNeedle = document.getElementById("compassNeedle");
@@ -160,10 +160,6 @@ window.addEventListener("keydown", (e) => {
     dayNight.phase = (dayNight.phase + 0.035) % 1; // step forward ~50 min
   }
 });
-
-// ---- Hint HUD: fade out after a few seconds ----
-const hud = document.getElementById("hud");
-setTimeout(() => hud && hud.classList.add("fade"), 7000);
 
 // Scratch colors for the orb tinting (no per-frame alloc).
 const __orbSky = DN.orbSkyNight.clone();

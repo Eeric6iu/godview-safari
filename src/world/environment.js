@@ -2,12 +2,12 @@
 // dust sheets, bird flocks and the per-herd dust trails. All of these
 // animate from the MAP clock, so the time accelerator drives them too.
 import * as THREE from "three";
-import { clamp } from "../core/utils.js?v=34";
-import { WORLD_W, WORLD_D, LAKES, lakeRadiusAt, L_MAP } from "../core/config.js?v=34";
-import { rng, scene, setLayerDeep } from "../core/context.js?v=34";
-import { terrainHeight } from "./terrain.js?v=34";
-import { mapCam, fly } from "../camera/mapcam.js?v=34";
-import { herds } from "../animals/animals.js?v=34";
+import { clamp } from "../core/utils.js?v=35";
+import { WORLD_W, WORLD_D, LAKES, lakeRadiusAt, L_MAP } from "../core/config.js?v=35";
+import { rng, scene, setLayerDeep } from "../core/context.js?v=35";
+import { terrainHeight } from "./terrain.js?v=35";
+import { mapCam, fly } from "../camera/mapcam.js?v=35";
+import { herds } from "../animals/animals.js?v=35";
 
 let clouds = [];
 let dustHaze = [];

@@ -2,36 +2,36 @@
 // the EXACT order of the pre-refactor build — they all draw from one
 // seeded rng stream, so order = world layout. Don't reorder casually.
 import * as THREE from "three";
-import { L_MAP, L_ROOM, isRigCloseup } from "./core/config.js?v=34";
+import { L_MAP, L_ROOM, isRigCloseup } from "./core/config.js?v=35";
 import {
   clock, scene, camera, renderer, setLayerDeep,
   roomObjects, tableObjects, windUniforms,
-} from "./core/context.js?v=34";
-import { createTerrain } from "./world/terrain.js?v=34";
+} from "./core/context.js?v=35";
+import { createTerrain } from "./world/terrain.js?v=35";
 import {
   createRealGrass, createGrassCards, createReeds, createShrubsAndTrees,
   createAcaciaGrove, createSafariLandmarks, createRealNature, createPalePatches,
-} from "./world/vegetation.js?v=34";
+} from "./world/vegetation.js?v=35";
 import {
   createClouds, createDustHaze, createWater, createBirds, createDustSystem,
   updateClouds, updateDustHaze, updateWater, updateBirds, updateDust,
-} from "./world/environment.js?v=34";
+} from "./world/environment.js?v=35";
 import {
   animals, herds, loadAnimalModelAssets, generateHerds,
   writeRuntimeReport, updateAnimals,
-} from "./animals/animals.js?v=34";
-import { createRoomAndTable, addRoomLighting } from "./room/room.js?v=34";
+} from "./animals/animals.js?v=35";
+import { createRoomAndTable, addRoomLighting } from "./room/room.js?v=35";
 import {
   mapCam, fly, controls, drag,
   enterFreeFly, exitFreeFly, resetMapCamera,
   updateMapCamera, updateRoam, tunePixelRatio,
   getDistanceQuality, targetPixelRatioForQuality, zoomAt, maxTiltFor,
-} from "./camera/mapcam.js?v=34";
+} from "./camera/mapcam.js?v=35";
 import {
   sun, dayNight, mapClock, advanceMapClock, dayNightSample,
   updateDayNight, updateSunFollow, getMapHemi,
-} from "./sim/daynight.js?v=34";
-import { updateDashboard } from "./ui/dashboard.js?v=34";
+} from "./sim/daynight.js?v=35";
+import { updateDashboard } from "./ui/dashboard.js?v=35";
 
 // ---- World construction (order = rng stream = layout; keep it) ----
 const terrain = createTerrain();
@@ -72,7 +72,7 @@ camera.layers.enable(L_ROOM);
 document.body.classList.add("ready");
 document.body.dataset.ready = "true";
 window.__safariHerdDemoReady = true;
-console.info("[godview-safari] build v34 — normal x1 object speed with longer day cycle");
+console.info("[godview-safari] build v35 — normal x1 object speed with longer day cycle");
 window.__dbg = {
   renderer, scene, camera, controls, mapCam, fly,
   enterFreeFly, exitFreeFly, updateMapCamera,
