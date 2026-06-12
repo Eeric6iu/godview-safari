@@ -1,0 +1,53 @@
+/* ============================================================
+   Design tokens — the single source for UI colors, radii,
+   shadows, type and control sizes. Components NEVER hardcode
+   these values; they consume the variables, so a reskin is a
+   one-file change.
+   ============================================================ */
+:root {
+  /* -- Surfaces -- */
+  --ui-panel-bg: rgba(255, 254, 248, 0.94); /* light control panels */
+  --ui-panel-bg-hover: rgba(255, 255, 255, 1);
+  --ui-pill-bg: rgba(30, 22, 14, 0.6); /* dark text pills */
+  --ui-pill-bg-strong: rgba(30, 22, 14, 0.82);
+
+  /* -- Ink -- */
+  --ui-ink: rgba(50, 38, 24, 0.85); /* control glyphs on light panels */
+  --ui-ink-dim: rgba(60, 45, 28, 0.7);
+  --ui-ink-track: rgba(50, 38, 24, 0.78); /* slider tracks */
+  --ui-knob: rgba(28, 22, 14, 0.96); /* slider knobs */
+  --ui-on-dark: rgba(255, 246, 230, 0.9); /* text on dark pills */
+  --ui-on-dark-accent: #ffd9a0;
+  --ui-hud-ink: rgba(38, 28, 18, 0.74);
+  --ui-hud-ink-strong: rgba(28, 20, 12, 0.86);
+  --ui-compass-north: #d33b2c;
+  --ui-compass-south: #b9b2a6;
+
+  /* -- Elevation -- */
+  --ui-shadow-panel: 0 1px 7px rgba(46, 32, 18, 0.38);
+  --ui-shadow-pill: 0 1px 6px rgba(28, 25, 23, 0.4);
+  --ui-shadow-badge: 0 2px 10px rgba(0, 0, 0, 0.5);
+  --ui-shadow-orb: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+
+  /* -- Radius -- */
+  --ui-r-panel: 10px;
+  --ui-r-card: 14px;
+  --ui-r-pill: 999px;
+
+  /* -- Control sizes -- */
+  --ui-ctl-w: 46px; /* width of the right-rail controls */
+  --ui-tilt-h: 130px; /* tilt slider track height */
+  --ui-orb-size: 68px; /* sun-orb dial */
+
+  /* -- Type -- */
+  --ui-font:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
+  /* -- Z layers -- */
+  --ui-z-controls: 10;
+  --ui-z-badge: 11;
+
+  /* -- Scene backdrop -- */
+  --scene-page-bg: #b98c57;
+}
