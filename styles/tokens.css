@@ -48,6 +48,11 @@
   --ui-z-controls: 10;
   --ui-z-badge: 11;
 
-  /* -- Scene backdrop -- */
-  --scene-page-bg: #b98c57;
+  /* -- Scene backdrop --
+     Also the iOS 26 Safari "chrome tint": Safari 26 colours the status bar
+     and the address bar by sampling the page's (or nearest fixed element's)
+     background-color — it no longer honours <meta theme-color>. Matching the
+     scene's atmospheric haze (0x120905) makes the browser bars read as a
+     continuation of the dim study instead of a bright mismatched band. */
+  --scene-page-bg: #120905;
 }
