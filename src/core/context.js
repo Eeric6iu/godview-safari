@@ -2,8 +2,8 @@
 // and the wind-sway registry. Created once at import time, imported by
 // every module that touches the scene.
 import * as THREE from "three";
-import { mulberry32 } from "./utils.js?v=35";
-import { PERF, isRigCloseup } from "./config.js?v=35";
+import { mulberry32 } from "./utils.js";
+import { PERF, isRigCloseup } from "./config.js";
 
 export const clock = new THREE.Clock();
 // ONE seeded stream feeds all procedural generation; the boot sequence in

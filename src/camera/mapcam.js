@@ -6,10 +6,10 @@
 // zero easing lag; programmatic moves (buttons, double-click, reset)
 // keep the animated goal-chasing.
 import * as THREE from "three";
-import { clamp, smoothstep } from "../core/utils.js?v=35";
-import { WORLD_W, WORLD_D, DEG, ROOM, PERF, isRigCloseup } from "../core/config.js?v=35";
-import { camera, canvasEl, renderer, pixelRatio } from "../core/context.js?v=35";
-import { terrainHeight } from "../world/terrain.js?v=35";
+import { clamp, smoothstep } from "../core/utils.js";
+import { WORLD_W, WORLD_D, DEG, ROOM, PERF, isRigCloseup } from "../core/config.js";
+import { camera, canvasEl, renderer, pixelRatio } from "../core/context.js";
+import { terrainHeight } from "../world/terrain.js";
 
 const DEFAULT_MAP_CAMERA = isRigCloseup
   ? { cx: -8, cz: 4, dist: 44, tilt: 58 * DEG, heading: 0.4 }

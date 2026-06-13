@@ -2,12 +2,12 @@
 // the ×1/×4/×8 accelerator, tilt slider, zoom, reset and compass. This
 // module only WIRES DOM to the camera/day-night state and mirrors that
 // state back per frame — all behavior lives in mapcam.js / daynight.js.
-import { clamp } from "../core/utils.js?v=35";
-import { DEG } from "../core/config.js?v=35";
+import { clamp } from "../core/utils.js";
+import { DEG } from "../core/config.js";
 import {
   mapCam, zoomAt, resetMapCamera, maxTiltFor,
-} from "../camera/mapcam.js?v=35";
-import { dayNight, dayNightSample, DN } from "../sim/daynight.js?v=35";
+} from "../camera/mapcam.js";
+import { dayNight, dayNightSample, DN } from "../sim/daynight.js";
 
 // ---- Compass: drag rotates/tilts, plain click animates back to north ----
 const compassNeedle = document.getElementById("compassNeedle");

@@ -15,87 +15,11 @@
       name="description"
       content="A realtime Three.js tabletop safari diorama with animated herds, warm study-room lighting, and interactive map controls."
     />
-    <script>
-      // ---- Dev live-reload (no extra server needed) ----
-      // The app is now split into modules, so the poller HEAD-checks every
-      // source file once a second (Last-Modified + Content-Length) and
-      // reloads when ANY of them changes. Works against a plain
-      // `python3 -m http.server`. Active only on localhost, or anywhere
-      // with ?live; disable with ?live=0.
-      (function () {
-        const p = new URLSearchParams(location.search);
-        const forced = p.get("live");
-        if (forced === "0" || forced === "off") return;
-        const isLocal = ["localhost", "127.0.0.1", "[::1]"].includes(
-          location.hostname,
-        );
-        if (!location.protocol.startsWith("http")) return;
-        if (!isLocal && forced === null) return;
-
-        const dir = location.pathname.replace(/[^/]*$/, "");
-        const FILES = [
-          location.pathname.endsWith("/")
-            ? location.pathname + "index.html"
-            : location.pathname,
-          dir + "styles/tokens.css",
-          dir + "styles/app.css",
-          dir + "src/core/utils.js",
-          dir + "src/core/config.js",
-          dir + "src/core/context.js",
-          dir + "src/core/materials.js",
-          dir + "src/world/terrain.js",
-          dir + "src/world/vegetation.js",
-          dir + "src/world/environment.js",
-          dir + "src/animals/animals.js",
-          dir + "src/room/room.js",
-          dir + "src/camera/mapcam.js",
-          dir + "src/sim/daynight.js",
-          dir + "src/ui/dashboard.js",
-          dir + "src/main.js",
-        ];
-        let signature = null;
-
-        async function poll() {
-          try {
-            const parts = await Promise.all(
-              FILES.map(async (url) => {
-                const res = await fetch(url + "?_lr=" + Date.now(), {
-                  method: "HEAD",
-                  cache: "no-store",
-                });
-                return (
-                  (res.headers.get("Last-Modified") || "") +
-                  "|" +
-                  (res.headers.get("Content-Length") || "")
-                );
-              }),
-            );
-            const next = parts.join("§");
-            if (signature !== null && next !== signature) {
-              console.info("[live-reload] change detected — reloading");
-              location.reload();
-              return;
-            }
-            signature = next;
-          } catch (e) {
-            // Server briefly unreachable (e.g. mid-save) — just retry.
-          }
-          window.__lrTimer = setTimeout(poll, 1000);
-        }
-        poll();
-        console.info("[live-reload] watching " + FILES.length + " files (add ?live=0 to disable)");
-      })();
-    </script>
-    <link rel="stylesheet" href="styles/tokens.css?v=35" />
-    <link rel="stylesheet" href="styles/app.css?v=35" />
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://unpkg.com/three@0.165.0/build/three.module.js",
-          "three/addons/": "https://unpkg.com/three@0.165.0/examples/jsm/"
-        }
-      }
-    </script>
+    <!-- Vite bundles these: dev serves them uncached with HMR, build emits
+         content-hashed files. No manual ?v= cache-busting, no importmap —
+         `three` resolves from node_modules. -->
+    <link rel="stylesheet" href="styles/tokens.css" />
+    <link rel="stylesheet" href="styles/app.css" />
   </head>
   <body>
     <main id="scene" aria-label="Godview Safari living diorama"></main>
@@ -161,6 +85,6 @@
     <div class="vignette"></div>
     <div class="grain"></div>
 
-    <script type="module" src="src/main.js?v=35"></script>
+    <script type="module" src="src/main.js"></script>
   </body>
 </html>

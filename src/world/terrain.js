@@ -2,9 +2,9 @@
 // anti-tiling ground shader, and the shared site queries (terrainHeight /
 // lushFactor / isUnderwater) that every placement system calls.
 import * as THREE from "three";
-import { clamp, lerp, smoothstep, fbm } from "../core/utils.js?v=35";
-import { WORLD_W, WORLD_D, LAKES, lakeRadiusAt } from "../core/config.js?v=35";
-import { rng } from "../core/context.js?v=35";
+import { clamp, lerp, smoothstep, fbm } from "../core/utils.js";
+import { WORLD_W, WORLD_D, LAKES, lakeRadiusAt } from "../core/config.js";
+import { rng } from "../core/context.js";
 
 // ---- Terrain height field ----
 // Layered FBM: broad dunes + medium swells + fine bumps + micro ripple,

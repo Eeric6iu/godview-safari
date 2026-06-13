@@ -2,36 +2,36 @@
 // the EXACT order of the pre-refactor build — they all draw from one
 // seeded rng stream, so order = world layout. Don't reorder casually.
 import * as THREE from "three";
-import { L_MAP, L_ROOM, isRigCloseup } from "./core/config.js?v=35";
+import { L_MAP, L_ROOM, isRigCloseup } from "./core/config.js";
 import {
   clock, scene, camera, renderer, setLayerDeep,
   roomObjects, tableObjects, windUniforms,
-} from "./core/context.js?v=35";
-import { createTerrain } from "./world/terrain.js?v=35";
+} from "./core/context.js";
+import { createTerrain } from "./world/terrain.js";
 import {
   createRealGrass, createGrassCards, createReeds, createShrubsAndTrees,
   createAcaciaGrove, createSafariLandmarks, createRealNature, createPalePatches,
-} from "./world/vegetation.js?v=35";
+} from "./world/vegetation.js";
 import {
   createClouds, createDustHaze, createWater, createBirds, createDustSystem,
   updateClouds, updateDustHaze, updateWater, updateBirds, updateDust,
-} from "./world/environment.js?v=35";
+} from "./world/environment.js";
 import {
   animals, herds, loadAnimalModelAssets, generateHerds,
   writeRuntimeReport, updateAnimals,
-} from "./animals/animals.js?v=35";
-import { createRoomAndTable, addRoomLighting } from "./room/room.js?v=35";
+} from "./animals/animals.js";
+import { createRoomAndTable, addRoomLighting } from "./room/room.js";
 import {
   mapCam, fly, controls, drag,
   enterFreeFly, exitFreeFly, resetMapCamera,
   updateMapCamera, updateRoam, tunePixelRatio,
   getDistanceQuality, targetPixelRatioForQuality, zoomAt, maxTiltFor,
-} from "./camera/mapcam.js?v=35";
+} from "./camera/mapcam.js";
 import {
   sun, dayNight, mapClock, advanceMapClock, dayNightSample,
   updateDayNight, updateSunFollow, getMapHemi,
-} from "./sim/daynight.js?v=35";
-import { updateDashboard } from "./ui/dashboard.js?v=35";
+} from "./sim/daynight.js";
+import { updateDashboard } from "./ui/dashboard.js";
 
 // ---- World construction (order = rng stream = layout; keep it) ----
 const terrain = createTerrain();
