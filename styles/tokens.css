@@ -23,19 +23,23 @@
   --ui-compass-north: #d33b2c;
   --ui-compass-south: #b9b2a6;
 
-  /* -- Editorial accent: the field-journal red. One value for kickers,
-     section rules, the active speed button and the census headline, so the
-     brand red never drifts (it was split across #a82a25 / #b72b25). -- */
-  --ui-accent: #b32a20;
-  --ui-accent-ink: rgba(255, 248, 235, 0.96); /* text on an accent fill */
+  /* -- Accent: a single restrained terracotta (Claude-ish). Used ONLY for
+     the active state + rare emphasis, never as a field of colour. Replaces
+     the field-journal red (#b32a20) that read as "newspaper". -- */
+  --ui-accent: #c15f3c;
+  --ui-accent-ink: #fdfcfa; /* text on an accent fill */
 
-  /* -- Paper sidebar tones: hairlines, ink and the inset panel surface,
-     sampled once instead of re-typed as rgba() across components. -- */
-  --ui-hair: rgba(84, 64, 47, 0.2);
-  --ui-hair-soft: rgba(84, 64, 47, 0.12);
-  --ui-paper-ink: rgba(26, 20, 16, 0.95);
-  --ui-paper-ink-2: rgba(57, 46, 37, 0.8);
-  --ui-paper-surface: rgba(255, 252, 243, 0.66);
+  /* -- Minimal warm-neutral sidebar (Anthropic-ish): an off-white canvas, a
+     quieter inset for cards/controls, warm near-black ink in three tiers,
+     and ONE faint hairline. No paper texture, no warm-yellow wash. -- */
+  --ui-surface: #faf9f5; /* sidebar canvas */
+  --ui-surface-inset: #f1efe8; /* cards, controls, wells */
+  --ui-paper-surface: #f1efe8; /* alias kept for existing control rules */
+  --ui-hair: rgba(33, 30, 26, 0.09);
+  --ui-hair-soft: rgba(33, 30, 26, 0.055);
+  --ui-paper-ink: #211e1a; /* primary text */
+  --ui-paper-ink-2: rgba(33, 30, 26, 0.6); /* secondary text */
+  --ui-paper-muted: rgba(33, 30, 26, 0.42); /* labels, meta */
 
   /* -- Elevation -- */
   --ui-shadow-panel: 0 1px 7px rgba(46, 32, 18, 0.38);

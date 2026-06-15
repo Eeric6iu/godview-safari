@@ -100,10 +100,11 @@ body.ready .loading {
 }
 
 /* ============================================================
-   Right-side editorial dashboard — a warm "field journal" rail:
-   the live animal census above the original map controls. It
-   breathes down the full height (CAMERA sinks to the foot) and
-   collapses to a slim paper tab, handing the whole frame back.
+   Right-side dashboard — minimal, warm-neutral (Anthropic-ish):
+   off-white surface, one faint hairline, sans type, soft radii,
+   a single restrained accent. Sans everything; no paper texture,
+   no newspaper rules. Content breathes the full height; collapses
+   to a slim handle.
    ============================================================ */
 :root {
   /* Rail width, shared with the out-of-rail collapse handle so the handle
@@ -117,32 +118,24 @@ body.ready .loading {
   bottom: 0;
   --ui-ctl-w: 42px;
   --ui-tilt-h: 96px;
-  --ui-orb-size: 56px;
+  --ui-orb-size: 54px;
   width: var(--dash-w);
   box-sizing: border-box;
   padding:
-    max(16px, env(safe-area-inset-top)) 18px
-    max(16px, env(safe-area-inset-bottom));
+    max(18px, env(safe-area-inset-top)) 18px
+    max(18px, env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
   z-index: var(--ui-z-controls);
   overflow-y: auto;
   overscroll-behavior: contain;
   color: var(--ui-paper-ink-2);
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.7), rgba(255, 252, 242, 0.95)),
-    repeating-linear-gradient(
-      0deg,
-      rgba(72, 48, 30, 0.028) 0,
-      rgba(72, 48, 30, 0.028) 1px,
-      transparent 1px,
-      transparent 12px
-    );
+  background: rgba(250, 249, 245, 0.92);
   border-left: 1px solid var(--ui-hair);
-  box-shadow: -20px 0 42px rgba(18, 9, 5, 0.26);
-  backdrop-filter: blur(14px) saturate(0.92);
-  -webkit-backdrop-filter: blur(14px) saturate(0.92);
+  box-shadow: -16px 0 44px rgba(33, 30, 26, 0.1);
+  backdrop-filter: blur(18px) saturate(1.05);
+  -webkit-backdrop-filter: blur(18px) saturate(1.05);
   scrollbar-width: none;
   transition:
     width 260ms cubic-bezier(0.32, 0.72, 0, 1),
@@ -155,8 +148,6 @@ body.ready .loading {
   height: 0;
 }
 
-/* -- Collapse handle: a slim paper tab clipped to the rail's left edge.
-   Stays put as the rail slides away, so it always offers the way back. -- */
 /* The rail slides out to the right when collapsed; the handle (a separate
    fixed element, below) rides from the rail's left edge to the screen edge. */
 #dashboard.collapsed {
@@ -171,15 +162,15 @@ body.ready .loading {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 27px;
-  height: 54px;
+  width: 26px;
+  height: 52px;
   padding: 0;
   border: 1px solid var(--ui-hair);
   border-right: none;
-  border-radius: 9px 0 0 9px;
-  background: rgba(255, 252, 242, 0.95);
-  color: var(--ui-paper-ink);
-  box-shadow: -10px 0 22px rgba(18, 9, 5, 0.16);
+  border-radius: var(--ui-r-panel) 0 0 var(--ui-r-panel);
+  background: rgba(250, 249, 245, 0.96);
+  color: var(--ui-paper-ink-2);
+  box-shadow: -8px 0 20px rgba(33, 30, 26, 0.08);
   cursor: pointer;
   z-index: var(--ui-z-controls);
   transition:
@@ -189,7 +180,7 @@ body.ready .loading {
 }
 .dashboardToggle:hover {
   background: #fff;
-  color: var(--ui-accent);
+  color: var(--ui-paper-ink);
 }
 .dashboardToggle.collapsed {
   right: 0;
@@ -203,78 +194,66 @@ body.ready .loading {
   transform: rotate(180deg);
 }
 
-/* -- Header: GODVIEW kicker · SAFARI wordmark · accent rule -- */
+/* -- Header: GODVIEW kicker · SAFARI wordmark (sans) -- */
 .dashHeader {
   flex: none;
-  padding-bottom: 12px;
+  padding-bottom: 15px;
   border-bottom: 1px solid var(--ui-hair);
 }
 .dashKicker,
 .dashSectionLabel,
 .controlBlock > span {
   font-size: 10.5px;
-  font-weight: 800;
-  letter-spacing: 0.26em;
+  font-weight: 600;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
-  color: var(--ui-accent);
+  color: var(--ui-paper-muted);
 }
 .dashTitle {
-  margin-top: 5px;
+  margin-top: 7px;
   color: var(--ui-paper-ink);
-  font-family: var(--ui-font-serif);
-  font-size: clamp(31px, 2.9vw, 41px);
+  font-family: var(--ui-font);
+  font-size: clamp(23px, 2.4vw, 29px);
   font-weight: 700;
-  line-height: 0.9;
-  letter-spacing: 0.05em;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
 }
 .dashRule {
-  width: 46px;
-  height: 3px;
-  margin-top: 13px;
-  background: var(--ui-accent);
+  display: none;
 }
 
-/* -- Sections: TIME · THE HERDS · CAMERA. Hairline between each;
-   CAMERA floats to the foot so the breathing room lands above the
-   controls rather than pooling under the whole rail. -- */
+/* -- Sections: TIME · THE HERDS · CAMERA. One faint hairline between each;
+   CAMERA floats to the foot so the breathing room lands above the controls. */
 .dashSection {
   display: flex;
   flex-direction: column;
   gap: 11px;
 }
 .dashSection + .dashSection {
-  padding-top: 14px;
+  padding-top: 16px;
   border-top: 1px solid var(--ui-hair);
 }
 .dashCameraSection {
   margin-top: auto;
-  padding-top: 14px;
+  padding-top: 16px;
   border-top: 1px solid var(--ui-hair);
 }
 .dashSectionLabel {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  line-height: 1.1;
-}
-.dashSectionLabel::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--ui-hair);
+  line-height: 1.2;
 }
 
 #dayClock {
   align-self: flex-start;
-  padding: 6px 11px;
-  background: rgba(37, 28, 20, 0.85);
-  color: var(--ui-on-dark);
-  font-size: 12px;
-  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: var(--ui-r-pill);
+  background: var(--ui-surface-inset);
+  border: 1px solid var(--ui-hair);
+  color: var(--ui-paper-ink);
+  font-size: 12.5px;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.01em;
   pointer-events: none;
-  box-shadow: 0 1px 5px rgba(18, 9, 5, 0.24);
   white-space: nowrap;
 }
 
@@ -282,8 +261,8 @@ body.ready .loading {
 #sunOrb {
   padding: 12px;
   border: 1px solid var(--ui-hair);
-  background: var(--ui-paper-surface);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.42);
+  border-radius: var(--ui-r-card);
+  background: var(--ui-surface-inset);
   cursor: pointer;
   touch-action: none;
   user-select: none;
@@ -305,19 +284,21 @@ body.ready .loading {
 #orbSpeedRow button {
   flex: 1;
   appearance: none;
-  border: 1px solid var(--ui-hair-soft);
+  border: 1px solid var(--ui-hair);
   padding: 6px 0;
-  background: rgba(255, 255, 255, 0.3);
+  border-radius: var(--ui-r-panel);
+  background: rgba(255, 255, 255, 0.5);
   color: var(--ui-paper-ink-2);
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   cursor: pointer;
   transition: background 140ms ease, color 140ms ease, border-color 140ms ease;
 }
 #orbSpeedRow button:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: #fff;
+  color: var(--ui-paper-ink);
 }
 #orbSpeedRow button.active {
   background: var(--ui-accent);
@@ -325,50 +306,47 @@ body.ready .loading {
   border-color: var(--ui-accent);
 }
 
-/* -- THE HERDS census -- */
+/* -- THE HERDS census: quiet two-column list, no per-row rules -- */
 .animalTotal {
   display: flex;
   align-items: baseline;
-  gap: 11px;
+  gap: 9px;
   color: var(--ui-paper-ink);
 }
 .animalTotal #animalTotalCount {
-  font-family: var(--ui-font-serif);
-  font-size: 39px;
+  font-family: var(--ui-font);
+  font-size: 35px;
   font-weight: 700;
-  line-height: 0.84;
+  line-height: 1;
+  letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
 }
 .animalTotal span:last-child {
-  max-width: 78px;
-  color: var(--ui-accent);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.22em;
-  line-height: 1.2;
+  color: var(--ui-paper-muted);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
 }
 .animalCensus {
   display: grid;
   gap: 0;
-  margin-top: 3px;
-  border-top: 1px solid var(--ui-hair-soft);
+  margin-top: 4px;
   scrollbar-width: none;
 }
 .animalRow {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-  min-height: 21px;
-  border-bottom: 1px solid var(--ui-hair-soft);
+  min-height: 23px;
   color: var(--ui-paper-ink-2);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.005em;
 }
 .animalRow b {
   color: var(--ui-paper-ink);
-  font-size: 12.5px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 
@@ -399,9 +377,9 @@ body.ready .loading {
 #tiltCtl {
   width: var(--ui-ctl-w);
   height: var(--ui-tilt-h);
-  border: 1px solid var(--ui-hair-soft);
-  background: var(--ui-paper-surface);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.42);
+  border: 1px solid var(--ui-hair);
+  border-radius: var(--ui-r-panel);
+  background: var(--ui-surface-inset);
   position: relative;
   cursor: ns-resize;
   touch-action: none;
@@ -416,7 +394,7 @@ body.ready .loading {
   width: 2px;
   margin-left: -1px;
   border-radius: 1px;
-  background: var(--ui-ink-track);
+  background: var(--ui-hair);
 }
 #tiltKnob {
   position: absolute;
@@ -426,17 +404,17 @@ body.ready .loading {
   height: 18px;
   margin-left: -9px;
   border-radius: 50%;
-  background: var(--ui-knob);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  background: var(--ui-paper-ink);
+  box-shadow: 0 1px 4px rgba(33, 30, 26, 0.28);
   pointer-events: none;
 }
 
 /* -- Zoom +/- -- */
 #zoomCtl {
   width: var(--ui-ctl-w);
-  border: 1px solid var(--ui-hair-soft);
-  background: var(--ui-paper-surface);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.42);
+  border: 1px solid var(--ui-hair);
+  border-radius: var(--ui-r-panel);
+  background: var(--ui-surface-inset);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -448,49 +426,53 @@ body.ready .loading {
   height: 38px;
   font-size: 21px;
   line-height: 1;
-  color: var(--ui-ink);
+  color: var(--ui-paper-ink-2);
   cursor: pointer;
+  transition: background 140ms ease, color 140ms ease;
 }
 #zoomCtl button:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--ui-paper-ink);
 }
 #zoomCtl button:first-child {
-  border-bottom: 1px solid var(--ui-hair-soft);
+  border-bottom: 1px solid var(--ui-hair);
 }
 
 #resetView {
   width: var(--ui-ctl-w);
   height: 38px;
-  border: 1px solid var(--ui-hair-soft);
-  background: var(--ui-paper-surface);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.42);
-  color: var(--ui-ink);
+  border: 1px solid var(--ui-hair);
+  border-radius: var(--ui-r-panel);
+  background: var(--ui-surface-inset);
+  color: var(--ui-paper-ink-2);
   cursor: pointer;
-  font-size: 20px;
+  font-size: 19px;
   line-height: 1;
   user-select: none;
+  transition: background 140ms ease, color 140ms ease;
 }
 #resetView:hover {
-  background: var(--ui-panel-bg-hover);
+  background: #fff;
+  color: var(--ui-paper-ink);
 }
 
 /* -- Compass -- */
 #compass {
   width: var(--ui-ctl-w);
   height: var(--ui-ctl-w);
-  border: 1px solid var(--ui-hair-soft);
+  border: 1px solid var(--ui-hair);
   border-radius: 50%;
-  background: var(--ui-paper-surface);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.42);
+  background: var(--ui-surface-inset);
   cursor: pointer;
   user-select: none;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 140ms ease;
 }
 #compass:hover {
-  background: var(--ui-panel-bg-hover);
+  background: #fff;
 }
 #compassNeedle {
   display: flex;
@@ -501,10 +483,10 @@ body.ready .loading {
   will-change: transform;
 }
 #compassNeedle .n {
-  color: var(--ui-compass-north);
+  color: var(--ui-accent);
 }
 #compassNeedle .s {
-  color: var(--ui-compass-south);
+  color: var(--ui-dim, rgba(33, 30, 26, 0.32));
 }
 #compass .nLabel {
   position: absolute;
@@ -513,7 +495,7 @@ body.ready .loading {
   transform: translateX(-50%);
   font-size: 8px;
   font-weight: 700;
-  color: var(--ui-ink-dim);
+  color: var(--ui-paper-muted);
   pointer-events: none;
 }
 
@@ -523,11 +505,11 @@ body.ready .loading {
     --ui-ctl-w: 42px;
     --ui-tilt-h: 84px;
     --ui-orb-size: 46px;
-    --dash-w: min(168px, 42vw);
+    --dash-w: min(170px, 43vw);
   }
   #dashboard {
     padding:
-      max(14px, env(safe-area-inset-top)) 13px
+      max(14px, env(safe-area-inset-top)) 14px
       max(14px, env(safe-area-inset-bottom));
     gap: 14px;
   }
@@ -536,7 +518,7 @@ body.ready .loading {
     height: 48px;
   }
   .dashTitle {
-    font-size: 25px;
+    font-size: 22px;
   }
   .dashHeader {
     padding-bottom: 12px;
@@ -547,24 +529,25 @@ body.ready .loading {
   }
   .dashKicker,
   .dashSectionLabel,
-  .controlBlock > span {
-    font-size: 9px;
-    letter-spacing: 0.2em;
+  .controlBlock > span,
+  .animalTotal span:last-child {
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
   }
   #dayClock {
-    font-size: 10px;
-    padding: 5px 8px;
+    font-size: 11px;
+    padding: 5px 10px;
   }
   #sunOrb {
-    padding: 8px;
+    padding: 9px;
   }
   #orbSpeedRow {
     gap: 4px;
-    margin-top: 7px;
+    margin-top: 8px;
   }
   #orbSpeedRow button {
-    font-size: 9px;
-    padding: 4px 0;
+    font-size: 9.5px;
+    padding: 5px 0;
   }
   #zoomCtl button {
     height: 35px;
@@ -575,17 +558,14 @@ body.ready .loading {
     font-size: 18px;
   }
   .animalTotal #animalTotalCount {
-    font-size: 33px;
+    font-size: 29px;
   }
-  .animalTotal span:last-child {
-    font-size: 9px;
+  .animalRow,
+  .animalRow b {
+    font-size: 11.5px;
   }
   .animalRow {
     min-height: 23px;
-    font-size: 9.5px;
-  }
-  .animalRow b {
-    font-size: 10px;
   }
   .dashControlGrid {
     gap: 10px;
