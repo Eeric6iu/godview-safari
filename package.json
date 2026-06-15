@@ -5,9 +5,10 @@
   "type": "module",
   "description": "Realtime Three.js tabletop safari diorama — animated herds, warm study-room lighting, Apple-Maps-style camera.",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 127.0.0.1 --port 3101 --strictPort",
+    "dev:lan": "vite --host 0.0.0.0 --port 3101 --strictPort",
     "build": "vite build",
-    "preview": "vite preview --host"
+    "preview": "vite preview --host 127.0.0.1 --port 3101 --strictPort"
   },
   "dependencies": {
     "three": "^0.165.0"

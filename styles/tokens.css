@@ -23,6 +23,20 @@
   --ui-compass-north: #d33b2c;
   --ui-compass-south: #b9b2a6;
 
+  /* -- Editorial accent: the field-journal red. One value for kickers,
+     section rules, the active speed button and the census headline, so the
+     brand red never drifts (it was split across #a82a25 / #b72b25). -- */
+  --ui-accent: #b32a20;
+  --ui-accent-ink: rgba(255, 248, 235, 0.96); /* text on an accent fill */
+
+  /* -- Paper sidebar tones: hairlines, ink and the inset panel surface,
+     sampled once instead of re-typed as rgba() across components. -- */
+  --ui-hair: rgba(84, 64, 47, 0.2);
+  --ui-hair-soft: rgba(84, 64, 47, 0.12);
+  --ui-paper-ink: rgba(26, 20, 16, 0.95);
+  --ui-paper-ink-2: rgba(57, 46, 37, 0.8);
+  --ui-paper-surface: rgba(255, 252, 243, 0.66);
+
   /* -- Elevation -- */
   --ui-shadow-panel: 0 1px 7px rgba(46, 32, 18, 0.38);
   --ui-shadow-pill: 0 1px 6px rgba(28, 25, 23, 0.4);
@@ -43,6 +57,9 @@
   --ui-font:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
+  /* Editorial display serif: the SAFARI wordmark + the big census numeral. */
+  --ui-font-serif:
+    Georgia, "Times New Roman", "Songti SC", "Noto Serif SC", serif;
 
   /* -- Z layers -- */
   --ui-z-controls: 10;

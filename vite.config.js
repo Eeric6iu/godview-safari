@@ -12,6 +12,20 @@ export default defineConfig(({ command }) => ({
   //   the document URL, so they ride this relative base automatically.
   base: command === "build" ? "./" : "/",
 
+  // Keep local development on one stable URL. If 3101 is occupied, fail
+  // clearly instead of silently moving to 3102/3103, which makes the
+  // browser appear to "miss" updates from the expected address.
+  server: {
+    host: "127.0.0.1",
+    port: 3101,
+    strictPort: true,
+  },
+  preview: {
+    host: "127.0.0.1",
+    port: 3101,
+    strictPort: true,
+  },
+
   // Pre-bundle three AND the addon entry points up front. Otherwise Vite
   // discovers three/addons/* lazily as deep modules import them (GLTFLoader
   // in room/animals/vegetation, SkeletonUtils, BufferGeometryUtils),

@@ -26,61 +26,106 @@
     <div class="loading">Loading Godview Safari</div>
     <div id="flyBadge">自由飞行 · <b>拖动</b>看向 · <b>WASD</b>走 · <b>Q/E·空格</b>升降 · <b>滚轮</b>前后 · <b>F</b> 退出</div>
 
-    <!-- Right-side control dashboard: time, sun dial, tilt, zoom, compass -->
+    <!-- Right-side sidebar dashboard: live census + existing map controls -->
     <div id="dashboard">
-      <div id="dayClock" title="地图时间 · T 暂停/继续 · [ ] 调时间">06:00 · Day</div>
-      <div id="sunOrb" title="太阳钟:拖动调时间 · 点表盘循环加速 ×1/×4/×8(只作用于桌面地图,房间不受影响)">
-        <svg id="orbSvg" viewBox="0 0 100 100">
-          <defs>
-            <clipPath id="orbClip"><circle cx="50" cy="50" r="47" /></clipPath>
-          </defs>
-          <!-- sky disc: tinted live from the day-night palette -->
-          <circle id="orbSky" cx="50" cy="50" r="47" fill="#8aa6c8" />
-          <g clip-path="url(#orbClip)">
-            <!-- below-horizon (night) half -->
-            <rect id="orbBelow" x="1" y="50" width="98" height="49" fill="rgba(8,8,14,0.34)" />
-          </g>
-          <!-- hour ticks: 24h dial, one every 2h (major at 6h) -->
-          <g id="orbTicks" stroke="rgba(255,250,240,0.5)">
-            <line x1="50" y1="3.5" x2="50" y2="9" stroke-width="1.6" />
-            <line x1="50" y1="91" x2="50" y2="96.5" stroke-width="1.6" />
-            <line x1="3.5" y1="50" x2="9" y2="50" stroke-width="1.6" />
-            <line x1="91" y1="50" x2="96.5" y2="50" stroke-width="1.6" />
-            <line x1="17.2" y1="17.2" x2="21.1" y2="21.1" stroke-width="1" />
-            <line x1="78.9" y1="21.1" x2="82.8" y2="17.2" stroke-width="1" />
-            <line x1="17.2" y1="82.8" x2="21.1" y2="78.9" stroke-width="1" />
-            <line x1="78.9" y1="78.9" x2="82.8" y2="82.8" stroke-width="1" />
-          </g>
-          <line id="orbHorizon" x1="3" y1="50" x2="97" y2="50" stroke="rgba(255,250,240,0.55)" stroke-width="1" stroke-dasharray="3 3" />
-          <!-- the big ball: the ground/earth the sun orbits -->
-          <circle id="orbEarth" cx="50" cy="50" r="15" fill="#b59265" stroke="rgba(0,0,0,0.35)" stroke-width="1" />
-          <!-- pale moon, always opposite the sun -->
-          <circle id="orbMoon" cx="88" cy="50" r="3.6" fill="#cdd4e2" opacity="0.85" />
-          <!-- the small ball: the sun, with its glow -->
-          <circle id="orbSunGlow" cx="12" cy="50" r="11" fill="#ffd9a0" opacity="0.3" />
-          <circle id="orbSun" cx="12" cy="50" r="6" fill="#ffe9c4" stroke="rgba(0,0,0,0.25)" stroke-width="0.8" />
-          <circle cx="50" cy="50" r="47" fill="none" stroke="rgba(255,254,248,0.85)" stroke-width="2.5" />
-        </svg>
-        <div id="orbSpeedRow" title="时间加速(只加速桌面地图上的一切)">
-          <button id="spd1" class="active">×1</button>
-          <button id="spd4">×4</button>
-          <button id="spd8">×8</button>
+      <header class="dashHeader">
+        <div class="dashKicker">GODVIEW</div>
+        <div class="dashTitle">SAFARI</div>
+        <div class="dashRule"></div>
+      </header>
+
+      <section class="dashSection dashTimeSection" aria-label="Map time controls">
+        <div class="dashSectionLabel">TIME</div>
+        <div id="dayClock" title="地图时间 · T 暂停/继续 · [ ] 调时间">06:00 · Day</div>
+        <div id="sunOrb" title="太阳钟:拖动调时间 · 点表盘循环加速 ×1/×4/×8(只作用于桌面地图,房间不受影响)">
+          <svg id="orbSvg" viewBox="0 0 100 100">
+            <defs>
+              <clipPath id="orbClip"><circle cx="50" cy="50" r="47" /></clipPath>
+            </defs>
+            <!-- sky disc: tinted live from the day-night palette -->
+            <circle id="orbSky" cx="50" cy="50" r="47" fill="#8aa6c8" />
+            <g clip-path="url(#orbClip)">
+              <!-- below-horizon (night) half -->
+              <rect id="orbBelow" x="1" y="50" width="98" height="49" fill="rgba(8,8,14,0.34)" />
+            </g>
+            <!-- hour ticks: 24h dial, one every 2h (major at 6h) -->
+            <g id="orbTicks" stroke="rgba(255,250,240,0.5)">
+              <line x1="50" y1="3.5" x2="50" y2="9" stroke-width="1.6" />
+              <line x1="50" y1="91" x2="50" y2="96.5" stroke-width="1.6" />
+              <line x1="3.5" y1="50" x2="9" y2="50" stroke-width="1.6" />
+              <line x1="91" y1="50" x2="96.5" y2="50" stroke-width="1.6" />
+              <line x1="17.2" y1="17.2" x2="21.1" y2="21.1" stroke-width="1" />
+              <line x1="78.9" y1="21.1" x2="82.8" y2="17.2" stroke-width="1" />
+              <line x1="17.2" y1="82.8" x2="21.1" y2="78.9" stroke-width="1" />
+              <line x1="78.9" y1="78.9" x2="82.8" y2="82.8" stroke-width="1" />
+            </g>
+            <line id="orbHorizon" x1="3" y1="50" x2="97" y2="50" stroke="rgba(255,250,240,0.55)" stroke-width="1" stroke-dasharray="3 3" />
+            <!-- the big ball: the ground/earth the sun orbits -->
+            <circle id="orbEarth" cx="50" cy="50" r="15" fill="#b59265" stroke="rgba(0,0,0,0.35)" stroke-width="1" />
+            <!-- pale moon, always opposite the sun -->
+            <circle id="orbMoon" cx="88" cy="50" r="3.6" fill="#cdd4e2" opacity="0.85" />
+            <!-- the small ball: the sun, with its glow -->
+            <circle id="orbSunGlow" cx="12" cy="50" r="11" fill="#ffd9a0" opacity="0.3" />
+            <circle id="orbSun" cx="12" cy="50" r="6" fill="#ffe9c4" stroke="rgba(0,0,0,0.25)" stroke-width="0.8" />
+            <circle cx="50" cy="50" r="47" fill="none" stroke="rgba(255,254,248,0.85)" stroke-width="2.5" />
+          </svg>
+          <div id="orbSpeedRow" title="时间加速(只加速桌面地图上的一切)">
+            <button id="spd1" class="active">×1</button>
+            <button id="spd4">×4</button>
+            <button id="spd8">×8</button>
+          </div>
         </div>
-      </div>
-      <div id="tiltCtl" title="俯仰:上 = 俯视,下 = 平视">
-        <div class="track"></div>
-        <div id="tiltKnob"></div>
-      </div>
-      <div id="zoomCtl">
-        <button id="zoomIn" title="放大">+</button>
-        <button id="zoomOut" title="缩小">−</button>
-      </div>
-      <button id="resetView" title="回到默认视角" aria-label="回到默认视角">↺</button>
-      <div id="compass" title="点击回正北 · 按住拖动旋转">
-        <div id="compassNeedle"><span class="n">▲</span><span class="s">▼</span></div>
-        <span class="nLabel">N</span>
-      </div>
+      </section>
+
+      <section class="dashSection dashAnimalSection" aria-label="Animal census">
+        <div class="dashSectionLabel">THE HERDS</div>
+        <div class="animalTotal">
+          <span id="animalTotalCount">000</span>
+          <span>ANIMALS</span>
+        </div>
+        <div id="animalCensus" class="animalCensus">
+          <div class="animalRow"><span>Loading</span><b>...</b></div>
+        </div>
+      </section>
+
+      <section class="dashSection dashCameraSection" aria-label="Camera controls">
+        <div class="dashSectionLabel">CAMERA</div>
+        <div class="dashControlGrid">
+          <div class="controlBlock">
+            <span>TILT</span>
+            <div id="tiltCtl" title="俯仰:上 = 俯视,下 = 平视">
+              <div class="track"></div>
+              <div id="tiltKnob"></div>
+            </div>
+          </div>
+          <div class="controlStack">
+            <div id="zoomCtl">
+              <button id="zoomIn" title="放大">+</button>
+              <button id="zoomOut" title="缩小">−</button>
+            </div>
+            <button id="resetView" title="回到默认视角" aria-label="回到默认视角">↺</button>
+            <div id="compass" title="点击回正北 · 按住拖动旋转">
+              <div id="compassNeedle"><span class="n">▲</span><span class="s">▼</span></div>
+              <span class="nLabel">N</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
+
+    <!-- Collapse handle lives OUTSIDE #dashboard: the rail's overflow/
+         backdrop-filter would otherwise clip a child handle, leaving no way
+         to reopen once collapsed. Fixed to the viewport edge instead. -->
+    <button
+      id="dashboardToggle"
+      class="dashboardToggle"
+      type="button"
+      title="收起/展开 dashboard"
+      aria-label="收起 dashboard"
+      aria-expanded="true"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+    </button>
 
     <div class="vignette"></div>
     <div class="grain"></div>

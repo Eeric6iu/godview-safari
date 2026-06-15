@@ -8,6 +8,45 @@ import {
   mapCam, zoomAt, resetMapCamera, maxTiltFor,
 } from "../camera/mapcam.js";
 import { dayNight, dayNightSample, DN } from "../sim/daynight.js";
+import { animals } from "../animals/animals.js";
+
+// ---- Sidebar collapse / expand ----
+const dashboardEl = document.getElementById("dashboard");
+const dashboardToggle = document.getElementById("dashboardToggle");
+function setDashboardCollapsed(collapsed) {
+  if (!dashboardEl || !dashboardToggle) return;
+  dashboardEl.classList.toggle("collapsed", collapsed);
+  // The handle is a separate fixed element; mirror the state onto it so its
+  // CSS (right offset + chevron flip) follows. JS owns only state + persist.
+  dashboardToggle.classList.toggle("collapsed", collapsed);
+  dashboardToggle.setAttribute("aria-expanded", String(!collapsed));
+  dashboardToggle.setAttribute(
+    "aria-label",
+    collapsed ? "展开 dashboard" : "收起 dashboard",
+  );
+  try {
+    localStorage.setItem("godviewDashboardCollapsed", collapsed ? "1" : "0");
+  } catch {}
+}
+// Restore the persisted state WITHOUT animating on load — no fly-in, and no
+// transition race that could strand the handle mid-track. Transitions are
+// re-enabled a frame later so interactive toggles still animate.
+dashboardEl.style.transition = "none";
+dashboardToggle.style.transition = "none";
+try {
+  setDashboardCollapsed(localStorage.getItem("godviewDashboardCollapsed") === "1");
+} catch {
+  setDashboardCollapsed(false);
+}
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    dashboardEl.style.transition = "";
+    dashboardToggle.style.transition = "";
+  });
+});
+dashboardToggle?.addEventListener("click", () => {
+  setDashboardCollapsed(!dashboardEl.classList.contains("collapsed"));
+});
 
 // ---- Compass: drag rotates/tilts, plain click animates back to north ----
 const compassNeedle = document.getElementById("compassNeedle");
@@ -165,7 +204,24 @@ window.addEventListener("keydown", (e) => {
 const __orbSky = DN.orbSkyNight.clone();
 const __orbEarth = DN.orbEarthNight.clone();
 const dayClockEl = document.getElementById("dayClock");
+const animalTotalEl = document.getElementById("animalTotalCount");
+const animalCensusEl = document.getElementById("animalCensus");
 let lastSpeedMul = 0;
+let lastAnimalSignature = "";
+
+const ANIMAL_LABELS = {
+  buffalo: "Buffalo",
+  bull: "Bulls",
+  deer: "Deer",
+  donkey: "Donkeys",
+  elephant: "Elephants",
+  giraffe: "Giraffes",
+  horse: "Horses",
+  jackal: "Jackals",
+  stag: "Stags",
+  wildebeest: "Wildebeest",
+  zebra: "Zebras",
+};
 
 // Per-frame mirror: compass needle, tilt knob, clock text and the
 // sun-orb dial all reflect the live camera / day-night state.
@@ -237,6 +293,8 @@ export function updateDashboard() {
       btn.classList.toggle("active", mul === dayNight.speedMul);
     }
   }
+
+  updateAnimalCensus();
 }
 
 // local smoothstep on numbers (utils version is identical; inlined name
@@ -244,4 +302,25 @@ export function updateDashboard() {
 function smoothstepNum(edge0, edge1, x) {
   const t = clamp((x - edge0) / (edge1 - edge0 || 0.0001), 0, 1);
   return t * t * (3 - 2 * t);
+}
+
+function updateAnimalCensus() {
+  if (!animalTotalEl || !animalCensusEl) return;
+  const counts = {};
+  for (const animal of animals) {
+    const type = animal.userData.type || "unknown";
+    counts[type] = (counts[type] || 0) + 1;
+  }
+  const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  const total = entries.reduce((sum, [, count]) => sum + count, 0);
+  const signature = entries.map(([type, count]) => `${type}:${count}`).join("|");
+  if (signature === lastAnimalSignature) return;
+  lastAnimalSignature = signature;
+  animalTotalEl.textContent = String(total).padStart(3, "0");
+  animalCensusEl.innerHTML = entries
+    .map(([type, count]) => {
+      const label = ANIMAL_LABELS[type] || type.replace(/-/g, " ");
+      return `<div class="animalRow"><span>${label}</span><b>${count}</b></div>`;
+    })
+    .join("");
 }

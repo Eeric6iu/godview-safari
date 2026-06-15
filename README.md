@@ -25,31 +25,52 @@ https://eeric6iu.github.io/godview-safari/
 
 ## Local Run
 
-This is a static site. Run any local static server from the project root:
+Use Vite for local development:
 
 ```bash
-python3 -m http.server 3101
+cd /Users/eeric6iu/Desktop/three-safari-herd-demo
+npm install
+npm run dev
 ```
 
 Then open:
 
 ```text
-http://localhost:3101
+http://127.0.0.1:3101/
 ```
 
-For another device on the same Wi-Fi, use the computer's LAN IP:
+`npm install` is only needed once, or after dependencies change.
+
+The dev server is pinned to port `3101`. If that port is already occupied,
+Vite fails clearly instead of silently moving to another port.
+
+For another device on the same Wi-Fi:
+
+```bash
+npm run dev:lan
+```
+
+Then open:
 
 ```text
-http://YOUR_LAN_IP:3101
+http://YOUR_LAN_IP:3101/
+```
+
+Vite is the only supported local server and build tool for this project.
+
+Production build:
+
+```bash
+npm run build
 ```
 
 ## Project Structure
 
 ```text
-index.html        Page shell, import map, UI controls
+index.html        Page shell and Vite entry
 styles/           UI styling
 src/              Three.js scene, camera, simulation, animals, room
-assets/           Models, textures, and environment assets
+public/assets/    Models, textures, and environment assets
 ```
 
 ## Deployment

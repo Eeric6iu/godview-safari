@@ -100,41 +100,190 @@ body.ready .loading {
 }
 
 /* ============================================================
-   Right-side control dashboard: time pill, sun-orb time dial,
-   tilt slider, zoom, reset, compass — one column, Apple style.
+   Right-side editorial dashboard — a warm "field journal" rail:
+   the live animal census above the original map controls. It
+   breathes down the full height (CAMERA sinks to the foot) and
+   collapses to a slim paper tab, handing the whole frame back.
    ============================================================ */
+:root {
+  /* Rail width, shared with the out-of-rail collapse handle so the handle
+     stays flush to the rail's left edge in both states. */
+  --dash-w: clamp(220px, 18vw, 256px);
+}
 #dashboard {
   position: fixed;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 0;
+  top: 0;
+  bottom: 0;
+  --ui-ctl-w: 42px;
+  --ui-tilt-h: 96px;
+  --ui-orb-size: 56px;
+  width: var(--dash-w);
+  box-sizing: border-box;
+  padding:
+    max(16px, env(safe-area-inset-top)) 18px
+    max(16px, env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
+  gap: 14px;
+  z-index: var(--ui-z-controls);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  color: var(--ui-paper-ink-2);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.7), rgba(255, 252, 242, 0.95)),
+    repeating-linear-gradient(
+      0deg,
+      rgba(72, 48, 30, 0.028) 0,
+      rgba(72, 48, 30, 0.028) 1px,
+      transparent 1px,
+      transparent 12px
+    );
+  border-left: 1px solid var(--ui-hair);
+  box-shadow: -20px 0 42px rgba(18, 9, 5, 0.26);
+  backdrop-filter: blur(14px) saturate(0.92);
+  -webkit-backdrop-filter: blur(14px) saturate(0.92);
+  scrollbar-width: none;
+  transition:
+    width 260ms cubic-bezier(0.32, 0.72, 0, 1),
+    padding 260ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+#dashboard::-webkit-scrollbar,
+.animalCensus::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* -- Collapse handle: a slim paper tab clipped to the rail's left edge.
+   Stays put as the rail slides away, so it always offers the way back. -- */
+/* The rail slides out to the right when collapsed; the handle (a separate
+   fixed element, below) rides from the rail's left edge to the screen edge. */
+#dashboard.collapsed {
+  transform: translateX(100%);
+  box-shadow: none;
+}
+
+.dashboardToggle {
+  position: fixed;
+  right: var(--dash-w);
+  top: max(24px, env(safe-area-inset-top));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 54px;
+  padding: 0;
+  border: 1px solid var(--ui-hair);
+  border-right: none;
+  border-radius: 9px 0 0 9px;
+  background: rgba(255, 252, 242, 0.95);
+  color: var(--ui-paper-ink);
+  box-shadow: -10px 0 22px rgba(18, 9, 5, 0.16);
+  cursor: pointer;
+  z-index: var(--ui-z-controls);
+  transition:
+    right 260ms cubic-bezier(0.32, 0.72, 0, 1),
+    background 160ms ease,
+    color 160ms ease;
+}
+.dashboardToggle:hover {
+  background: #fff;
+  color: var(--ui-accent);
+}
+.dashboardToggle.collapsed {
+  right: 0;
+}
+.dashboardToggle svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 260ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.dashboardToggle.collapsed svg {
+  transform: rotate(180deg);
+}
+
+/* -- Header: GODVIEW kicker · SAFARI wordmark · accent rule -- */
+.dashHeader {
+  flex: none;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--ui-hair);
+}
+.dashKicker,
+.dashSectionLabel,
+.controlBlock > span {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ui-accent);
+}
+.dashTitle {
+  margin-top: 5px;
+  color: var(--ui-paper-ink);
+  font-family: var(--ui-font-serif);
+  font-size: clamp(31px, 2.9vw, 41px);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: 0.05em;
+}
+.dashRule {
+  width: 46px;
+  height: 3px;
+  margin-top: 13px;
+  background: var(--ui-accent);
+}
+
+/* -- Sections: TIME · THE HERDS · CAMERA. Hairline between each;
+   CAMERA floats to the foot so the breathing room lands above the
+   controls rather than pooling under the whole rail. -- */
+.dashSection {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.dashSection + .dashSection {
+  padding-top: 14px;
+  border-top: 1px solid var(--ui-hair);
+}
+.dashCameraSection {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--ui-hair);
+}
+.dashSectionLabel {
+  display: flex;
   align-items: center;
   gap: 10px;
-  z-index: var(--ui-z-controls);
+  line-height: 1.1;
+}
+.dashSectionLabel::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--ui-hair);
 }
 
 #dayClock {
-  padding: 5px 11px;
-  border-radius: var(--ui-r-pill);
-  background: var(--ui-pill-bg);
+  align-self: flex-start;
+  padding: 6px 11px;
+  background: rgba(37, 28, 20, 0.85);
   color: var(--ui-on-dark);
-  font-size: 11.5px;
+  font-size: 12px;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   pointer-events: none;
-  box-shadow: var(--ui-shadow-pill);
+  box-shadow: 0 1px 5px rgba(18, 9, 5, 0.24);
   white-space: nowrap;
 }
 
 /* -- Sun-orb card: dial + time accelerator -- */
 #sunOrb {
-  width: calc(var(--ui-orb-size) + 16px);
-  padding: 8px 8px 7px;
-  border-radius: var(--ui-r-card);
-  background: var(--ui-panel-bg);
-  box-shadow: var(--ui-shadow-panel);
+  padding: 12px;
+  border: 1px solid var(--ui-hair);
+  background: var(--ui-paper-surface);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.42);
   cursor: pointer;
   touch-action: none;
   user-select: none;
@@ -150,36 +299,109 @@ body.ready .loading {
 }
 #orbSpeedRow {
   display: flex;
-  gap: 3px;
-  margin-top: 7px;
+  gap: 6px;
+  margin-top: 11px;
 }
 #orbSpeedRow button {
   flex: 1;
   appearance: none;
-  border: none;
-  padding: 3px 0;
-  border-radius: 6px;
-  background: transparent;
-  color: var(--ui-ink-dim);
-  font-size: 10px;
+  border: 1px solid var(--ui-hair-soft);
+  padding: 6px 0;
+  background: rgba(255, 255, 255, 0.3);
+  color: var(--ui-paper-ink-2);
+  font-size: 11px;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
   cursor: pointer;
+  transition: background 140ms ease, color 140ms ease, border-color 140ms ease;
 }
 #orbSpeedRow button:hover {
   background: rgba(0, 0, 0, 0.05);
 }
 #orbSpeedRow button.active {
-  background: var(--ui-pill-bg);
-  color: var(--ui-on-dark);
+  background: var(--ui-accent);
+  color: var(--ui-accent-ink);
+  border-color: var(--ui-accent);
+}
+
+/* -- THE HERDS census -- */
+.animalTotal {
+  display: flex;
+  align-items: baseline;
+  gap: 11px;
+  color: var(--ui-paper-ink);
+}
+.animalTotal #animalTotalCount {
+  font-family: var(--ui-font-serif);
+  font-size: 39px;
+  font-weight: 700;
+  line-height: 0.84;
+  font-variant-numeric: tabular-nums;
+}
+.animalTotal span:last-child {
+  max-width: 78px;
+  color: var(--ui-accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  line-height: 1.2;
+}
+.animalCensus {
+  display: grid;
+  gap: 0;
+  margin-top: 3px;
+  border-top: 1px solid var(--ui-hair-soft);
+  scrollbar-width: none;
+}
+.animalRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  min-height: 21px;
+  border-bottom: 1px solid var(--ui-hair-soft);
+  color: var(--ui-paper-ink-2);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.animalRow b {
+  color: var(--ui-paper-ink);
+  font-size: 12.5px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* -- CAMERA: tilt on the left, the zoom/reset/compass stack on the right -- */
+.dashControlGrid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: end;
+}
+.controlBlock,
+.controlStack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.controlBlock {
+  align-items: flex-start;
+}
+.controlStack {
+  align-items: center;
+}
+.controlBlock > span {
+  margin-bottom: 3px;
 }
 
 /* -- Tilt slider: up = top-down, down = oblique -- */
 #tiltCtl {
   width: var(--ui-ctl-w);
   height: var(--ui-tilt-h);
-  border-radius: calc(var(--ui-ctl-w) / 2);
-  background: var(--ui-panel-bg);
-  box-shadow: var(--ui-shadow-panel);
+  border: 1px solid var(--ui-hair-soft);
+  background: var(--ui-paper-surface);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.42);
   position: relative;
   cursor: ns-resize;
   touch-action: none;
@@ -212,9 +434,9 @@ body.ready .loading {
 /* -- Zoom +/- -- */
 #zoomCtl {
   width: var(--ui-ctl-w);
-  border-radius: var(--ui-r-panel);
-  background: var(--ui-panel-bg);
-  box-shadow: var(--ui-shadow-panel);
+  border: 1px solid var(--ui-hair-soft);
+  background: var(--ui-paper-surface);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.42);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -233,16 +455,15 @@ body.ready .loading {
   background: rgba(0, 0, 0, 0.05);
 }
 #zoomCtl button:first-child {
-  border-bottom: 1px solid rgba(60, 45, 28, 0.16);
+  border-bottom: 1px solid var(--ui-hair-soft);
 }
 
 #resetView {
   width: var(--ui-ctl-w);
   height: 38px;
-  border: none;
-  border-radius: var(--ui-r-panel);
-  background: var(--ui-panel-bg);
-  box-shadow: var(--ui-shadow-panel);
+  border: 1px solid var(--ui-hair-soft);
+  background: var(--ui-paper-surface);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.42);
   color: var(--ui-ink);
   cursor: pointer;
   font-size: 20px;
@@ -257,9 +478,10 @@ body.ready .loading {
 #compass {
   width: var(--ui-ctl-w);
   height: var(--ui-ctl-w);
+  border: 1px solid var(--ui-hair-soft);
   border-radius: 50%;
-  background: var(--ui-panel-bg);
-  box-shadow: var(--ui-shadow-panel);
+  background: var(--ui-paper-surface);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.42);
   cursor: pointer;
   user-select: none;
   position: relative;
@@ -295,39 +517,54 @@ body.ready .loading {
   pointer-events: none;
 }
 
-/* ---- Mobile: let the diorama own the screen, not the controls ----
-   Phones in EITHER orientation (narrow width OR short height). The heavy
-   sun-orb card shrinks the most, panels turn translucent so the rail
-   recedes, gaps tighten — while taps stay usable (~40px). */
+/* ---- Mobile: keep the sidebar compact while preserving tap targets. */
 @media (max-width: 768px), (max-height: 560px) {
   :root {
     --ui-ctl-w: 42px;
     --ui-tilt-h: 84px;
-    --ui-orb-size: 44px;
-    /* recede: lighter panels + softer shadow so controls don't shout */
-    --ui-panel-bg: rgba(252, 250, 244, 0.8);
-    --ui-pill-bg: rgba(28, 20, 12, 0.48);
-    --ui-shadow-panel: 0 1px 5px rgba(46, 32, 18, 0.28);
+    --ui-orb-size: 46px;
+    --dash-w: min(168px, 42vw);
   }
   #dashboard {
-    right: 9px;
-    gap: 6px;
+    padding:
+      max(14px, env(safe-area-inset-top)) 13px
+      max(14px, env(safe-area-inset-bottom));
+    gap: 14px;
+  }
+  .dashboardToggle {
+    width: 25px;
+    height: 48px;
+  }
+  .dashTitle {
+    font-size: 25px;
+  }
+  .dashHeader {
+    padding-bottom: 12px;
+  }
+  .dashSection + .dashSection,
+  .dashCameraSection {
+    padding-top: 13px;
+  }
+  .dashKicker,
+  .dashSectionLabel,
+  .controlBlock > span {
+    font-size: 9px;
+    letter-spacing: 0.2em;
   }
   #dayClock {
     font-size: 10px;
-    padding: 3px 8px;
+    padding: 5px 8px;
   }
   #sunOrb {
-    width: calc(var(--ui-orb-size) + 16px);
-    padding: 5px 5px 4px;
+    padding: 8px;
   }
   #orbSpeedRow {
-    gap: 2px;
-    margin-top: 4px;
+    gap: 4px;
+    margin-top: 7px;
   }
   #orbSpeedRow button {
     font-size: 9px;
-    padding: 2px 0;
+    padding: 4px 0;
   }
   #zoomCtl button {
     height: 35px;
@@ -336,5 +573,21 @@ body.ready .loading {
   #resetView {
     height: 35px;
     font-size: 18px;
+  }
+  .animalTotal #animalTotalCount {
+    font-size: 33px;
+  }
+  .animalTotal span:last-child {
+    font-size: 9px;
+  }
+  .animalRow {
+    min-height: 23px;
+    font-size: 9.5px;
+  }
+  .animalRow b {
+    font-size: 10px;
+  }
+  .dashControlGrid {
+    gap: 10px;
   }
 }
